@@ -66,3 +66,7 @@ The data in 'me2' is now identical to that in 'me' in the previous example.
 * The Java class for the object must have a no-args constructor
 * The fields included in the JSON data must have public mutator methods following the Java naming standard (setFieldName())
 * The Java class must not include any array fields
+
+## Coming Soon
+
+* Support for arrays when converting from JSON to Java Objects and vice-versa
