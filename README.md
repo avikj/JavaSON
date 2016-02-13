@@ -29,13 +29,13 @@ using the Java Reflection package.
 
 #### Converting to JSON
 
-* A field will be included in the JSON output if and only if the field is public or has a public accessor method following the Java naming standard (getFieldName())
+* A field will be included in the JSON output if and only if the field has a public accessor method following the Java naming standard (getFieldName())
 
 #### Converting to Java Object
 
 * JSON data must include an entry for "class" that stores the value of the Java class name for an object. This name is automatically included when a JSONObject is created using Converter.toJSONObject().
 * The Java class for the object must have a no-args constructor
-* The fields included in the JSON data must either be public in the Java class or have public mutator methods following the Java naming standard (setFieldName())
+* The fields included in the JSON data must have public mutator methods following the Java naming standard (setFieldName())
 
 
 
