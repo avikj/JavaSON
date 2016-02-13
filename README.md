@@ -8,34 +8,37 @@ using the Java Reflection package.
 ## Code Example
 
 #### Converting to JSON
-		Animal myCat = new Animal("cat", "Amber", 4);
-		Person me = new Person("Avik Jain", 15, 4.0, myCat, new Point(1, 2));
-		JSONObject jsonMe = Converter.toJSONObject(me);
-
+```java
+Animal myCat = new Animal("cat", "Amber", 4);
+Person me = new Person("Avik Jain", 15, 4.0, myCat, new Point(1, 2));
+JSONObject jsonMe = Converter.toJSONObject(me);
+```
 'jsonMe' now stores the following json data:
-
-	{
-	    "name": "Avik Jain",
-	    "gpa": 4,
-	    "location": {
-	        "x": 1,
-	        "y": 2,
-	        "class": "co.avikj.JavaSON.demo.Point"
-	    },
-	    "class": "co.avikj.JavaSON.demo.Person",
-	    "age": 15,
-	    "pet": {
-	        "name": "Amber",
-	        "type": "cat",
-	        "class": "co.avikj.JavaSON.demo.Animal",
-	        "age": 4
-	    }
-	}
-	
+```
+{
+    "name": "Avik Jain",
+    "gpa": 4,
+    "location": {
+        "x": 1,
+        "y": 2,
+        "class": "co.avikj.JavaSON.demo.Point"
+    },
+    "class": "co.avikj.JavaSON.demo.Person",
+    "age": 15,
+    "pet": {
+        "name": "Amber",
+        "type": "cat",
+        "class": "co.avikj.JavaSON.demo.Animal",
+        "age": 4
+    }
+}
+```	
 #### Converting to Java Object
+
+```java
 	JSONObject jsonMe2 = new JSONObject("{\"name\":\"Avik Jain\",\"gpa\":4,\"location\":{\"x\":1,\"y\":2,\"class\":\"co.avikj.JavaSON.demo.Point\"},\"class\":\"co.avikj.JavaSON.demo.Person\",\"age\":15,\"pet\":{\"name\":\"Amber\",\"type\":\"cat\",\"class\":\"co.avikj.JavaSON.demo.Animal\",\"age\":4}}");
 	Person me2 = Converter.toJavaObject(jsonMe2)
-
+```
 The data in 'me2' is now identical to that in 'me' in the previous example.
 
 	
