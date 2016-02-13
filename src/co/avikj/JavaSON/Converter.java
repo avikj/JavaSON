@@ -30,10 +30,10 @@ public class Converter {
 		try {
 			clazz = (Class<T>) Class.forName(json.getString("class"));
 		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
+			// TODO Implement custom exception
 			e1.printStackTrace();
 		} catch (JSONException e1) {
-			// TODO Auto-generated catch block
+			// TODO Implement custom exception
 			e1.printStackTrace();
 		}
 		T obj = null;
@@ -43,7 +43,7 @@ public class Converter {
 				| IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException
 				| NullPointerException e) {
-			// Clazz does not have no-args constructor
+			// clazz does not have no-args constructor
 			e.printStackTrace();// TODO Create custom exception
 		}
 
@@ -59,10 +59,10 @@ public class Converter {
 					field.set(obj, json.get(field.getName()));
 				}
 
-				// if it is not public, try to set its value through a modifier
+				// if it is not public, try to set its value through a mutator
 				// method
 				else {
-					Method setter = clazz.getMethod(getModifierName(field.getName()), field.getType());
+					Method setter = clazz.getMethod(getMutatorName(field.getName()), field.getType());
 					if (Modifier.isPublic(setter.getModifiers())){
 						set(setter, clazz.cast(obj), json.get(field.getName()));
 						// setter.invoke(clazz.cast(obj), json.get(field.getName()));
@@ -88,7 +88,7 @@ public class Converter {
 		}
 	}
 	
-	private static String getModifierName(String fieldName) {
+	private static String getMutatorName(String fieldName) {
 		return "set" + Character.toUpperCase(fieldName.charAt(0))
 				+ fieldName.substring(1);
 	}
