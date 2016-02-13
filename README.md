@@ -8,7 +8,9 @@ using the Java Reflection package.
 ## Installation
 
 Download the following .jar file and add it to your Java project's build path:
+```
 [javason.jar](https://github.com/avikj/JavaSON/releases/download/v1.0-alpha/javason.jar)
+```
 You can then import the converter.
 ```java
 import co.avikj.JavaSON.Converter;
