@@ -14,25 +14,28 @@ using the Java Reflection package.
 	   "name": "Avik Jain",
 	   "gpa": 4,
 	   "age": 15,
+	   "class": "Person",
 	   "pet": {
 	      "name": "Amber",
 	      "type": "cat",
+	      "class": "Animal",
 	      "age": 4
 	   }
 	}
 	
+## Format Requirements
 
-## Motivation
+#### Converting to JSON
 
-Often when building a multi-platform application, it is difficult to use the same data format
-across Android (Java) and web (javascript) front-ends. 
+* A field will be included in the JSON output if and only if the field is public or has a public accessor method following the Java naming standard (getFieldName())
 
-## Installation
-Coming soon!
+#### Converting to Java Object
 
-## API Reference
+* JSON data must include an entry for "class" that stores the value of the Java class name for an object. This name is automatically included when a JSONObject is created using Converter.toJSONObject().
+* The Java class for the object must have a no-args constructor
+* The fields included in the JSON data must either be public in the Java class or have public mutator methods following the Java naming standard (setFieldName())
 
-Coming soon!
+
 
 ## Tests
 
