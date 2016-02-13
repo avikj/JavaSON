@@ -6,6 +6,8 @@ JavaSON is a tiny Java library that allows easy conversion between JSON data and
 using the Java Reflection package.
 
 ## Code Example
+
+#### Converting to JSON
 	Animal myCat = new Animal("cat", "Amber", 4);
 	Person me = new Person("Avik Jain", 15, 4.0, myCat);	
 	JSONObject jsonMe = Converter.toJSONObject(me);
@@ -24,6 +26,14 @@ using the Java Reflection package.
 	      "age": 4
 	   }
 	}
+	
+#### Converting to Java Object
+	JSONObject jsonMe2 = new JSONObject("{\"name\":\"Avik Jain\",\"gpa\":4,\"location\":{\"x\":1,\"y\":2,\"class\":\"co.avikj.JavaSON.demo.Point\"},\"class\":\"co.avikj.JavaSON.demo.Person\",\"age\":15,\"pet\":{\"name\":\"Amber\",\"type\":\"cat\",\"class\":\"co.avikj.JavaSON.demo.Animal\",\"age\":4}}");
+	Person me2 = Converter.toJavaObject(jsonMe2)
+
+The data in 'me2' is now identical to that in 'me' in the previous example.
+
+	
 	
 ## Format Requirements
 
