@@ -9,5 +9,20 @@ public class Tester {
 		
 		JSONObject jsonMe = Converter.toJSONObject(me);
 		System.out.println(jsonMe.toString(3));
+		
+		/* Prints the following to the console.
+		 * 
+		 * {
+		 *	   "name": "Avik Jain",
+		 *	   "gpa": 4,
+		 *	   "age": 15,
+		 *	   "pet": {
+		 *	      "name": "Amber",
+		 *	      "type": "cat",
+		 *	      "age": 4
+		 *	   }
+		 *	}
+		 * 
+		 */
 	}
 }
