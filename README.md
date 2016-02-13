@@ -60,6 +60,7 @@ The data in 'me2' is now identical to that in 'me' in the previous example.
 
 * A field will be included in the JSON output if and only if the field has a public accessor method following the Java naming standard (getFieldName())
 * The JSON data must not contain any arrays
+
 #### Converting to Java Object
 
 * JSON data must include an entry for "class" that stores the value of the Java class name for an object. This name is automatically included when a JSONObject is created using Converter.toJSONObject().
