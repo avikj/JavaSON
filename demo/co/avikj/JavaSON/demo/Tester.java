@@ -11,28 +11,28 @@ public class Tester {
 		Person me = new Person("Avik Jain", 15, 4.0, myCat, new Point(1, 2));
 
 		JSONObject jsonMe = Converter.toJSONObject(me);
-		System.out.println(jsonMe.toString());		
+		System.out.println(jsonMe.toString(4));		
 		
 		
 		
 		/* Prints the following to the console.
-		{
-		    "name": "Avik Jain",
-		    "gpa": 4,
-		    "location": {
-		        "x": "1",
-		        "y": "2",
-		        "class": "java.awt.Point"
-		    },
-		    "class": "Person",
-		    "age": 15,
-		    "pet": {
-		        "name": "Amber",
-		        "type": "cat",
-		        "class": "Animal",
-		        "age": 4
-		    }
-		}
+			{
+			    "name": "Avik Jain",
+			    "gpa": 4,
+			    "location": {
+			        "x": 1,
+			        "y": 2,
+			        "class": "co.avikj.JavaSON.demo.Point"
+			    },
+			    "class": "co.avikj.JavaSON.demo.Person",
+			    "age": 15,
+			    "pet": {
+			        "name": "Amber",
+			        "type": "cat",
+			        "class": "co.avikj.JavaSON.demo.Animal",
+			        "age": 4
+			    }
+			}
 	 */
 		
 		
