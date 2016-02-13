@@ -28,8 +28,7 @@ Often when building a multi-platform application, it is difficult to use the sam
 across Android (Java) and web (javascript) front-ends. 
 
 ## Installation
-
-Provide code examples and explanations of how to get the project.
+Coming soon!
 
 ## API Reference
 
@@ -38,7 +37,3 @@ Coming soon!
 ## Tests
 
 Example code can be found under demos.
-
-## License
-
-A short snippet describing the license (MIT, Apache, etc.)
