@@ -17,6 +17,7 @@ import org.json.JSONObject;
  */
 public class Converter {
 	/**
+	 * Creates a Java object using data from a JSON Object
 	 * 
 	 * @param json
 	 *            JSONObject representing object of class clazz
@@ -24,7 +25,6 @@ public class Converter {
 	 *            Class of returned object (Can be accessed by ClassName.class).
 	 * @return Object of class clazz with data from JSONObject json.
 	 */
-	@SuppressWarnings("unchecked")
 	public static <T> T toJavaObject(JSONObject json) {
 		Class<T> clazz = null;
 		try {

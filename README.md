@@ -5,6 +5,15 @@
 JavaSON is a tiny Java library that allows easy conversion between JSON data and Java Objects,
 using the Java Reflection package.
 
+## Installation
+
+Download the following .jar file and add it to your Java project's build path:
+[javason.jar](https://github.com/avikj/JavaSON/releases/download/v1.0-alpha/javason.jar)
+You can then import the converter.
+```java
+import co.avikj.JavaSON.Converter;
+```
+
 ## Code Example
 
 #### Converting to JSON
@@ -41,7 +50,7 @@ JSONObject jsonMe = Converter.toJSONObject(me);
 ```
 The data in 'me2' is now identical to that in 'me' in the previous example.
 
-	
+######Complete testing code can be found [here](https://github.com/avikj/JavaSON/tree/master/demo/co/avikj/JavaSON/demo)
 	
 ## Format Requirements
 
@@ -55,8 +64,3 @@ The data in 'me2' is now identical to that in 'me' in the previous example.
 * The Java class for the object must have a no-args constructor
 * The fields included in the JSON data must have public mutator methods following the Java naming standard (setFieldName())
 
-
-
-## Tests
-
-Example code can be found under demos.
