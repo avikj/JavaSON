@@ -9,7 +9,9 @@ using the Java Reflection package.
 	Animal myCat = new Animal("cat", "Amber", 4);
 	Person me = new Person("Avik Jain", 15, 4.0, myCat);	
 	JSONObject jsonMe = Converter.toJSONObject(me);
+
 'jsonMe' now stores the following json data:
+
 	{
 	   "name": "Avik Jain",
 	   "gpa": 4,
