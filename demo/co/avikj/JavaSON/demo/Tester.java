@@ -3,8 +3,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import co.avikj.JavaSON.Converter;
+import co.avikj.JavaSON.JavaSONException;
 public class Tester {
-	public static void main(String[] args) throws JSONException{
+	public static void main(String[] args) throws JSONException, JavaSONException{
 			
 		//////// Test converting Java object to JSON Object ////////
 		Animal myCat = new Animal("cat", "Amber", 4);
@@ -42,6 +43,5 @@ public class Tester {
 		System.out.printf("name=%s, gpa=%f, age=%d, pet.name=%s", me2.getName(), me2.getGpa(), me2.getAge(), me2.getPet().getName());
 		// Prints the following to the console
 		// name=Avik Jain, gpa=4.000000, age=15, pet.name=Amber
-		
 	}
 }

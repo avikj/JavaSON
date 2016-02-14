@@ -1,5 +1,6 @@
 package co.avikj.JavaSON;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -24,29 +25,38 @@ public class Converter {
 	 * @param clazz
 	 *            Class of returned object (Can be accessed by ClassName.class).
 	 * @return Object of class clazz with data from JSONObject json.
+	 * @throws JavaSONException 
 	 */
-	public static <T> T toJavaObject(JSONObject json) {
+	public static <T> T toJavaObject(JSONObject json) throws JavaSONException {
 		Class<T> clazz = null;
+		String clazzName = "";
 		try {
-			clazz = (Class<T>) Class.forName(json.getString("class"));
-		} catch (ClassNotFoundException e1) {
-			// TODO Implement custom exception
-			e1.printStackTrace();
-		} catch (JSONException e1) {
-			// TODO Implement custom exception
-			e1.printStackTrace();
-		}
-		T obj = null;
-		try {
-			obj = clazz.getConstructor().newInstance();
-		} catch (InstantiationException | IllegalAccessException
-				| IllegalArgumentException | InvocationTargetException
-				| NoSuchMethodException | SecurityException
-				| NullPointerException e) {
-			// clazz does not have no-args constructor
-			e.printStackTrace();// TODO Create custom exception
+			clazzName = json.getString("class");
+		} catch (JSONException e2) {
+			throw new JavaSONException("JSON data does not include entry for 'class'.");
 		}
 
+		System.out.println("class: "+clazzName);
+		
+		try {
+			clazz = (Class<T>) Class.forName(clazzName);
+		} catch (ClassNotFoundException e1) {
+			throw new JavaSONException("class "+clazzName+" not found. ");
+		} 
+		Constructor<T> objConstructor = null;
+		T obj = null;
+		try {
+			objConstructor = clazz.getConstructor();
+		} catch(IllegalArgumentException | NoSuchMethodException e){
+			throw new JavaSONException("Class "+clazzName+" does not contain nullary (no-args) constructor.");
+		}
+
+		try{
+			obj = objConstructor.newInstance();
+		}catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e){
+			throw new JavaSONException("Class "+clazzName+" could not be instantiated using nullary constructor.");
+		}
+		
 		Field[] fields = clazz.getDeclaredFields();
 
 		// loop through all the fields in the class
@@ -54,36 +64,40 @@ public class Converter {
 			int mod = field.getModifiers();
 
 			// if the field is public, its value can be set with Field.set();
-			try {
-				if (Modifier.isPublic(mod)) {
+			if (Modifier.isPublic(mod)) {
+				try {
 					field.set(obj, json.get(field.getName()));
+				} catch (IllegalAccessException|JSONException e) {
+					throw new JavaSONException("Could not set value for public field "+field.getName());
 				}
-
-				// if it is not public, try to set its value through a mutator
-				// method
-				else {
-					Method setter = clazz.getMethod(getMutatorName(field.getName()), field.getType());
-					if (Modifier.isPublic(setter.getModifiers())){
-						set(setter, clazz.cast(obj), json.get(field.getName()));
-						// setter.invoke(clazz.cast(obj), json.get(field.getName()));
-					}
-
-				}
-			} catch (Exception e) {
-				// There was an error storing the data
-				e.printStackTrace();
 			}
+
+			// if it is not public, try to set its value through a mutator
+			// method
+			else {
+				try{
+					Method setter = clazz.getMethod(getMutatorName(field.getName()), field.getType());
+					set(setter, clazz.cast(obj), json.get(field.getName()));
+				}catch(IllegalAccessException | IllegalArgumentException | InvocationTargetException | ClassNotFoundException | JSONException | NoSuchMethodException | SecurityException e){
+					throw new JavaSONException("Could not set value for private field "+field.getName()+" due to lack of mutator method.");
+				}
+			}
+			
 		}
 
 		return obj;
 	}
 	
-	private static void set(Method setter, Object obj, Object value) throws JSONException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException{
+	private static void set(Method setter, Object obj, Object value) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, JavaSONException{
 		if(isBasicType(value)){
 			setter.invoke(obj, value);
 		}else{
 			JSONObject jsonValue = (JSONObject)value;
-			String className = jsonValue.getString("class");
+			try{
+				String className = jsonValue.getString("class");
+			}catch(JSONException e){
+				throw new JavaSONException("JSON data does not include entry for 'class'.");
+			}
 			setter.invoke(obj, toJavaObject(jsonValue));
 		}
 	}
