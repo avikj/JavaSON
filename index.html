@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Javason : JavaSON is a tiny Java library that allows easy conversion between JSON data and Java Objects, using the Java Reflection package.">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Javason</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/avikj/JavaSON">View on GitHub</a>
+
+          <h1 id="project_title">Javason</h1>
+          <h2 id="project_tagline">JavaSON is a tiny Java library that allows easy conversion between JSON data and Java Objects, using the Java Reflection package.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/avikj/JavaSON/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/avikj/JavaSON/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h2>
+<a id="synopsis" class="anchor" href="#synopsis" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Synopsis</h2>
+
+<p>JavaSON is a tiny Java library that allows easy conversion between JSON data and Java Objects,
+using the Java Reflection package.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Download the following .jar file and add it to your Java project's build path:</p>
+
+<p><a href="https://github.com/avikj/JavaSON/releases/download/v1.0-alpha/javason.jar">javason.jar</a></p>
+
+<p>You can then import the converter and exception classes.</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">import</span> <span class="pl-smi">co.avikj.JavaSON.JavaSONConverter</span>;
+<span class="pl-k">import</span> <span class="pl-smi">co.avikj.JavaSON.JavaSONException</span>;</pre></div>
+
+<h2>
+<a id="code-example" class="anchor" href="#code-example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Code Example</h2>
+
+<h4>
+<a id="converting-to-json" class="anchor" href="#converting-to-json" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Converting to JSON</h4>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-smi">Animal</span> myCat <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">Animal</span>(<span class="pl-s"><span class="pl-pds">"</span>cat<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>Amber<span class="pl-pds">"</span></span>, <span class="pl-c1">4</span>);
+<span class="pl-smi">Person</span> me <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">Person</span>(<span class="pl-s"><span class="pl-pds">"</span>Avik Jain<span class="pl-pds">"</span></span>, <span class="pl-c1">15</span>, <span class="pl-c1">4.0</span>, myCat, <span class="pl-k">new</span> <span class="pl-smi">Point</span>(<span class="pl-c1">1</span>, <span class="pl-c1">2</span>));
+<span class="pl-smi">JSONObject</span> jsonMe <span class="pl-k">=</span> <span class="pl-smi">JavaSONConverter</span><span class="pl-k">.</span>toJSONObject(me);</pre></div>
+
+<p>'jsonMe' now stores the following JSON data:</p>
+
+<pre><code>{
+    "name": "Avik Jain",
+    "gpa": 4,
+    "location": {
+        "x": 1,
+        "y": 2,
+        "class": "co.avikj.JavaSON.demo.Point"
+    },
+    "class": "co.avikj.JavaSON.demo.Person",
+    "age": 15,
+    "pet": {
+        "name": "Amber",
+        "type": "cat",
+        "class": "co.avikj.JavaSON.demo.Animal",
+        "age": 4
+    }
+}
+</code></pre>
+
+<h4>
+<a id="converting-to-java-object" class="anchor" href="#converting-to-java-object" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Converting to Java Object</h4>
+
+<div class="highlight highlight-source-java"><pre>    <span class="pl-smi">JSONObject</span> jsonMe2 <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">JSONObject</span>(<span class="pl-s"><span class="pl-pds">"</span>{<span class="pl-cce">\"</span>name<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>Avik Jain<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>gpa<span class="pl-cce">\"</span>:4,<span class="pl-cce">\"</span>location<span class="pl-cce">\"</span>:{<span class="pl-cce">\"</span>x<span class="pl-cce">\"</span>:1,<span class="pl-cce">\"</span>y<span class="pl-cce">\"</span>:2,<span class="pl-cce">\"</span>class<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>co.avikj.JavaSON.demo.Point<span class="pl-cce">\"</span>},<span class="pl-cce">\"</span>class<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>co.avikj.JavaSON.demo.Person<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>age<span class="pl-cce">\"</span>:15,<span class="pl-cce">\"</span>pet<span class="pl-cce">\"</span>:{<span class="pl-cce">\"</span>name<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>Amber<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>type<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>cat<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>class<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>co.avikj.JavaSON.demo.Animal<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>age<span class="pl-cce">\"</span>:4}}<span class="pl-pds">"</span></span>);
+    <span class="pl-smi">Person</span> me2 <span class="pl-k">=</span> <span class="pl-smi">JavaSONConverter</span><span class="pl-k">.</span>toJavaObject(jsonMe2)</pre></div>
+
+<p>The data in 'me2' is now identical to that in 'me' in the previous example.</p>
+
+<h6>
+<a id="complete-testing-code-can-be-found-here" class="anchor" href="#complete-testing-code-can-be-found-here" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Complete testing code can be found <a href="https://github.com/avikj/JavaSON/tree/master/co/avikj/JavaSON/demo">here</a>
+</h6>
+
+<h2>
+<a id="format-requirements" class="anchor" href="#format-requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Format Requirements</h2>
+
+<h4>
+<a id="converting-to-json-1" class="anchor" href="#converting-to-json-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Converting to JSON</h4>
+
+<ul>
+<li>A field will be included in the JSON output if and only if the field has a public accessor method following the Java naming standard (getFieldName())</li>
+<li>The JSON data must not contain any arrays</li>
+</ul>
+
+<h4>
+<a id="converting-to-java-object-1" class="anchor" href="#converting-to-java-object-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Converting to Java Object</h4>
+
+<ul>
+<li>JSON data must include an entry for "class" that stores the value of the Java class name for an object. This name is automatically included when a JSONObject is created using JavaSONConverter.toJSONObject().</li>
+<li>The Java class for the object must have a no-args constructor</li>
+<li>The fields included in the JSON data must have public mutator methods following the Java naming standard (setFieldName())</li>
+<li>The Java class must not include any array fields</li>
+</ul>
+
+<h2>
+<a id="coming-soon" class="anchor" href="#coming-soon" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Coming Soon</h2>
+
+<ul>
+<li>Support for arrays when converting from JSON to Java Objects and vice-versa</li>
+</ul>
+
+<h3>
+<a id="contributors" class="anchor" href="#contributors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributors</h3>
+
+<p>JavaSON was created by Avik Jain (<a href="https://github.com/avikj" class="user-mention">@avikj</a>) in February 2016.</p>
+
+<h3>
+<a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Support or Contact</h3>
+
+<p>Create an issue <a href="https://github.com/avikj/JavaSON/issues">here</a> to report a bug or suggest a feature.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Javason maintained by <a href="https://github.com/avikj">avikj</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
