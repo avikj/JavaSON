@@ -53,7 +53,7 @@ JSONObject jsonMe = JavaSONConverter.toJSONObject(me);
 ```
 The data in 'me2' is now identical to that in 'me' in the previous example.
 
-######Complete testing code can be found [here](https://github.com/avikj/JavaSON/tree/master/demo/co/avikj/JavaSON/demo)
+######Complete testing code can be found [here](https://github.com/avikj/JavaSON/tree/master/co/avikj/JavaSON/demo)
 	
 ## Format Requirements
 
