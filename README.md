@@ -11,9 +11,10 @@ Download the following .jar file and add it to your Java project's build path:
 
 [javason.jar](https://github.com/avikj/JavaSON/releases/download/v1.0-alpha/javason.jar)
 
-You can then import the converter.
+You can then import the converter and exception classes.
 ```java
 import co.avikj.JavaSON.Converter;
+import co.avikj.JavaSON.JavaSONException;
 ```
 
 ## Code Example
